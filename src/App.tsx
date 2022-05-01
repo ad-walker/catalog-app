@@ -1,10 +1,17 @@
 import { ChakraProvider } from "@chakra-ui/react";
-import ProductList from "./components/ProductList";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Product from "./routes/Product";
+import Products from "./routes/Products";
 
 export default function App() {
   return (
     <ChakraProvider>
-      <ProductList />
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Products />} />
+          <Route path="product/:productId" element={<Product />} />
+        </Routes>
+      </BrowserRouter>
     </ChakraProvider>
   );
 }
