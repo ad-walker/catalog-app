@@ -28,7 +28,7 @@ export const fetchProducts = async (
   props: ProductSearchProps
 ): Promise<ProductSearchResults> => {
   const { searchTerm, minPrice, maxPrice, inStockOnly, pagination } = props;
-  const { from, to } = getPagination(pagination, 10);
+  const { from, to } = getPagination(pagination, 6);
   let query = SupabaseClient.from("product")
     .select(
       "product_id, vendor, name, description, unit_cost, image_url, in_stock",
