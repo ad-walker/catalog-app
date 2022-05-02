@@ -131,33 +131,31 @@ export default function Products() {
     );
   };
   return (
-    <>
-      <Box>
-        <Container maxW={"7xl"} py={16} as={Stack} spacing={12}>
-          <Stack spacing={0} align={"center"}>
-            <Heading>Product Catalog</Heading>
-          </Stack>
-          {searchForm()}
-          <Divider />
+    <Box>
+      <Container maxW={"7xl"} py={16} as={Stack} spacing={12}>
+        <Stack spacing={0} align={"center"}>
+          <Heading>Product Catalog</Heading>
+        </Stack>
+        {searchForm()}
+        <Divider />
 
-          <InfiniteScroll
-            dataLength={products.length}
-            next={() => {
-              setPagination(pagination + 1);
-            }}
-            hasMore={hasMore}
-            loader={
-              <Center>
-                <Text fontSize="2xl" pt={2} pb={2}>
-                  Loading...
-                </Text>
-              </Center>
-            }
-          >
-            <ProductList products={products} />
-          </InfiniteScroll>
-        </Container>
-      </Box>
-    </>
+        <InfiniteScroll
+          dataLength={products.length}
+          next={() => {
+            setPagination(pagination + 1);
+          }}
+          hasMore={hasMore}
+          loader={
+            <Center>
+              <Text fontSize="2xl" pt={2} pb={2}>
+                Loading...
+              </Text>
+            </Center>
+          }
+        >
+          <ProductList products={products} />
+        </InfiniteScroll>
+      </Container>
+    </Box>
   );
 }
