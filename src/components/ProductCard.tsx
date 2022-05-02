@@ -20,33 +20,33 @@ export default function ProductCard(props: Product) {
     in_stock,
   } = props;
   return (
-    <Flex>
-      <Box
-        w={"35%"}
-        bgSize="cover"
-        bgPosition="center"
-        style={{
-          backgroundImage: `url(${image_url})`,
-        }}
-        borderRadius="10px"
-      ></Box>
-
-      <Box w={"65%"} p={{ base: 1, md: 6 }} justifyContent="flex-start">
-        <VStack align="stretch">
-          <Text fontSize="2xl" fontWeight="bold">
-            {name}
-          </Text>
-          <Text fontSize="1xl">{vendor}</Text>
-          <Text mt={2} fontSize="sm" isTruncated>
-            {description}
-          </Text>
-          <Text fontWeight="bold" fontSize="lg">
-            ${unit_cost.toFixed(2)}
-          </Text>
-          <Text fontSize="1xl">{in_stock ? "In Stock" : "Out of Stock"}</Text>
-          <Link to={"product/" + product_id}>View Detail</Link>
-        </VStack>
-      </Box>
-    </Flex>
+    <Link to={"product/" + product_id}>
+      <Flex>
+        <Box
+          w={"35%"}
+          bgSize="cover"
+          bgPosition="center"
+          style={{
+            backgroundImage: `url(${props.image_url})`,
+          }}
+          borderRadius="10px"
+        />
+        <Box w={"65%"} p={{ base: 1, md: 6 }} justifyContent="flex-start">
+          <VStack align="stretch">
+            <Text fontSize="2xl" fontWeight="bold">
+              {name}
+            </Text>
+            <Text fontSize="1xl">{vendor}</Text>
+            <Text mt={2} fontSize="sm" isTruncated>
+              {description}
+            </Text>
+            <Text fontWeight="bold" fontSize="lg">
+              ${unit_cost.toFixed(2)}
+            </Text>
+            <Text fontSize="1xl">{in_stock ? "In Stock" : "Out of Stock"}</Text>
+          </VStack>
+        </Box>
+      </Flex>
+    </Link>
   );
 }

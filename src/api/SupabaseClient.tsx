@@ -11,16 +11,30 @@ export interface ProductSearchProps {
   minPrice: number;
   maxPrice: number;
   inStockOnly: boolean;
+  pagination: number;
 }
+export interface ProductSearchResults {
+  hasMore: boolean;
+  data: Product[];
+}
+const getPagination = (page: number, size: number) => {
+  const limit = size ? +size : 3;
+  const from = page ? page * limit : 0;
+  const to = page ? from + size - 1 : size - 1;
+
+  return { from, to };
+};
 export const fetchProducts = async (
   props: ProductSearchProps
-): Promise<Product[]> => {
-  const { searchTerm, minPrice, maxPrice, inStockOnly } = props;
-
-  console.log(props);
-  let query = SupabaseClient.from("product").select(
-    "product_id, vendor, name, description, unit_cost, image_url, in_stock"
-  );
+): Promise<ProductSearchResults> => {
+  const { searchTerm, minPrice, maxPrice, inStockOnly, pagination } = props;
+  const { from, to } = getPagination(pagination, 5);
+  let query = SupabaseClient.from("product")
+    .select(
+      "product_id, vendor, name, description, unit_cost, image_url, in_stock",
+      { count: "exact" }
+    )
+    .range(from, to);
 
   // Chain conditionals per Supabase docs
   if (searchTerm !== "") {
@@ -36,7 +50,12 @@ export const fetchProducts = async (
     query.lte("unit_cost", maxPrice);
   }
   const res = await query;
-  return res.status === 200 ? (res.body as Product[]) : [];
+  if (!res.error) {
+    return {
+      hasMore: to + 1 < (res.count || -1),
+      data: res.data as Product[],
+    };
+  } else return { hasMore: false, data: [] };
 };
 
 export const fetchProductDetail = async (
