@@ -8,8 +8,8 @@ export default function ProductList(props: Record<string, any>) {
     <Box>
       <SimpleGrid columns={{ base: 1, md: 2 }} spacing="20px">
         {(products as Product[]).map((product) => (
-          <Stack direction="column">
-            <ProductCard key={product.product_id} {...product} />
+          <Stack direction="column" key={product.product_id}>
+            <ProductCard {...product} />
             <Divider />
           </Stack>
         ))}
