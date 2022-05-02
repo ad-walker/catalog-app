@@ -65,6 +65,7 @@ export default function Products() {
         From
       </FormLabel>
       <NumberInput
+        id="min-price"
         precision={2}
         defaultValue={maxPrice}
         onChange={(val) => setMinPrice(val)}
@@ -81,6 +82,7 @@ export default function Products() {
         To
       </FormLabel>
       <NumberInput
+        id="max-price"
         precision={2}
         defaultValue={maxPrice}
         onChange={(val) => setMaxPrice(val)}
@@ -93,7 +95,7 @@ export default function Products() {
         </NumberInputStepper>
         <NumberInputField />
       </NumberInput>
-      <FormLabel htmlFor="in-stock-only" mb="0">
+      <FormLabel htmlFor="in-stock" mb="0">
         In-Stock
       </FormLabel>
       <Switch

@@ -27,7 +27,7 @@ export default function ProductCard(props: Product) {
           bgSize="cover"
           bgPosition="center"
           style={{
-            backgroundImage: `url(${props.image_url})`,
+            backgroundImage: `url(${image_url})`,
           }}
           borderRadius="10px"
         />

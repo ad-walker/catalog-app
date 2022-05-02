@@ -26,7 +26,18 @@ export default function ProductDetail(props: Record<string, any>) {
   }, [props]);
 
   const renderProductDetail = (): ReactNode => {
-    return !product.name ? (
+    const {
+      name,
+      type,
+      description,
+      unit_cost,
+      units_sold,
+      gross_sales,
+      dimensions,
+      vendor,
+      in_stock,
+    } = product;
+    return !name ? (
       <Center>
         <Spinner size="xl" />
       </Center>
@@ -46,33 +57,33 @@ export default function ProductDetail(props: Record<string, any>) {
 
         <Box py={12} px={6} maxW={{ base: "xl", lg: "5xl" }} w={{ lg: "50%" }}>
           <Text fontSize={{ base: "2xl", md: "3xl" }} fontWeight="bold">
-            {product.name}
+            {name}
           </Text>
-          <Text fontSize="2xl">{product.vendor}</Text>
-          <Badge>{product.type}</Badge>
-          <p>{product.description}</p>
+          <Text fontSize="2xl">{vendor}</Text>
+          <Badge>{type}</Badge>
+          <p>{description}</p>
           <Text fontSize="md" pt={2} color="gray.600">
-            Dimensions: {product.dimensions}
+            Dimensions: {dimensions}
           </Text>
           <Text fontSize="2xl" fontWeight="bold" pt={2} pb={2}>
-            ${product.unit_cost.toFixed(2)}
+            ${unit_cost.toFixed(2)}
           </Text>
           <Box borderWidth="1px" borderRadius="lg" p={2}>
             <StatGroup>
               <Stat>
                 <StatLabel>Units Sold</StatLabel>
-                <StatNumber>{product.units_sold}</StatNumber>
+                <StatNumber>{units_sold}</StatNumber>
               </Stat>
               <Stat>
                 <StatLabel>Gross Sales</StatLabel>
-                <StatNumber>${product.gross_sales.toFixed(2)}</StatNumber>
+                <StatNumber>${gross_sales.toFixed(2)}</StatNumber>
               </Stat>
             </StatGroup>
           </Box>
           <HStack pt={5}>
             <Box>
               <Link
-                bg={product.in_stock ? "gray.900" : "gray.500"}
+                bg={in_stock ? "gray.900" : "gray.500"}
                 color="gray.100"
                 px={5}
                 py={3}
@@ -80,7 +91,7 @@ export default function ProductDetail(props: Record<string, any>) {
                 rounded="lg"
                 _hover={{ bg: "gray.700" }}
               >
-                {product.in_stock ? "Add to Cart" : "Out of Stock"}
+                {in_stock ? "Add to Cart" : "Out of Stock"}
               </Link>
             </Box>
             <Box>
