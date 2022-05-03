@@ -152,6 +152,7 @@ export default function ProductSearch() {
               </Text>
             </Center>
           }
+          endMessage={<Divider />}
         >
           <ProductList products={products} />
         </InfiniteScroll>
