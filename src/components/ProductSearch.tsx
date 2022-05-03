@@ -67,6 +67,8 @@ export default function ProductSearch() {
       </FormLabel>
       <NumberInput
         id="min-price"
+        min={0.0}
+        max={999999.99}
         precision={2}
         defaultValue={maxPrice}
         onChange={(val) => setMinPrice(val)}
@@ -84,6 +86,8 @@ export default function ProductSearch() {
       </FormLabel>
       <NumberInput
         id="max-price"
+        min={0.0}
+        max={999999.99}
         precision={2}
         defaultValue={maxPrice}
         onChange={(val) => setMaxPrice(val)}
